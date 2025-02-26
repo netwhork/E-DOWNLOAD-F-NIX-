@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G B SISTEMAS - Menu Animado</title>
+    <link rel="stylesheet" href="style_dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menu Lateral com efeito dropdown -->
+        <nav class="sidebar">
+            <div class="menu-header">GB SISTEMAS</div>
+            <ul class="menu-categories">
+                <li class="menu-category">
+                    <div class="category-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Prefeitura</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-pen"></i>NFS-e mensal</a></li>
+                        <li><a href="#"><i class="fas fa-dollar-sign"></i>NFS-e Anual</a></li>
+                        <li><a href="#"><i class="fas fa-history"></i>DARF</a></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <div class="category-header">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Sefaz</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-file-alt"></i>Notas Fiscais 55</a></li>
+                        <li><a href="#"><i class="fas fa-receipt"></i>NFC-e</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i>Cte Emissor</a></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <div class="category-header">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certidões</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-building"></i>Ecac PJ</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i>Ecac PF</a></li>
+                        <li><a href="#"><i class="fas fa-city"></i>Municipal</a></li>
+                        <li><a href="#"><i class="fas fa-landmark"></i>Sefaz</a></li>
+                        <li><a href="#"><i class="fas fa-id-card"></i>Regularidade FGTS</a></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <div class="category-header">
+                        <i class="fas fa-cog"></i>
+                        <span>Empresas</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Geral</a></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <div class="category-header">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Cadastrar</a></li>
+                    </ul>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Buscar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-logout">
+                    <a href="#" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header>
+                <h1>G B SISTEMAS</h1>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Filtrar" class="search-input">
+                </div>
+            </header>
+            
+            <div class="content">
+                <h2>Conteúdo principal</h2>
+                <p>Sistema de gestão GB Sistemas.</p>
+            </div>
+        </main>
+    </div>
+<script src="dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar evento de clique para os cabeçalhos de categoria
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Toggle da classe 'active' no elemento pai (li.menu-category)
+                    this.parentElement.classList.toggle('active');
+                    
+                    // Atualizar o ícone da seta
+                    const arrow = this.querySelector('.arrow');
+                    if (this.parentElement.classList.contains('active')) {
+                        arrow.classList.remove('fa-chevron-down');
+                        arrow.classList.add('fa-chevron-up');
+                    } else {
+                        arrow.classList.remove('fa-chevron-up');
+                        arrow.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Abrir o primeiro menu por padrão
+            if (categoryHeaders.length > 0) {
+                categoryHeaders[0].click();
+            }
+        });
+
+
+    </script>
+</body>
+</html>
