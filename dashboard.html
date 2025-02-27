@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G B SISTEMAS - Menu Animado</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style_dash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSKZO6JqTPQIaVsuMRF_NifGvuiLT2STc",
+            authDomain: "controle-usuario-64b08.firebaseapp.com",
+            projectId: "controle-usuario-64b08",
+            storageBucket: "controle-usuario-64b08.firebasestorage.app",
+            messagingSenderId: "1005734164997",
+            appId: "1:1005734164997:web:0cfa0b869178aa4b947a6c"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        
+        // Verificar autenticação na página do Dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (!user) {
+                    // Se não estiver autenticado, redirecionar para o login
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -95,7 +121,7 @@
             </div>
         </main>
     </div>
-<script src="dashboard.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Adicionar evento de clique para os cabeçalhos de categoria
@@ -122,9 +148,56 @@
             if (categoryHeaders.length > 0) {
                 categoryHeaders[0].click();
             }
+            
+            // Get the search input element
+            const searchInput = document.getElementById('searchInput');
+            
+            // Add focus event listener
+            if (searchInput) {
+                searchInput.addEventListener('focus', function() {
+                    this.classList.add('focused');
+                });
+                
+                // Add blur event listener
+                searchInput.addEventListener('blur', function() {
+                    this.classList.remove('focused');
+                });
+                
+                // Set cursor to text
+                searchInput.style.cursor = 'text';
+            }
+            
+            function fazerLogout() {
+    // Desconectar do Firebase Auth
+    firebase.auth().signOut()
+        .then(() => {
+            // Logout bem-sucedido, redirecionar para a página de login
+            console.log("Usuário desconectado com sucesso");
+            window.location.href = 'index.html';
+        })
+        .catch((error) => {
+            // Se ocorrer um erro no logout
+            console.error("Erro ao fazer logout:", error);
+            alert("Ocorreu um erro ao fazer logout. Por favor, tente novamente.");
         });
+}
+            // Adicionar evento de logout ao botão
+            const logoutButton = document.getElementById('btnLogout');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function() {
+                    // Chama a função de logout global
+                    if (typeof fazerLogout === 'function') {
+                        fazerLogout();
+                    } else {
+                        console.error('Função de logout não encontrada');
+                    }
+                });
+            }
 
 
+        });
     </script>
+    <!-- Importar auth.js para ter acesso à função fazerLogout -->
+    <script src="auth.js"></script>
 </body>
 </html>
