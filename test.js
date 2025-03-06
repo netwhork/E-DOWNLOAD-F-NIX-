@@ -3,7 +3,7 @@ const { chromium } = require("playwright");
 async function pref(empresaId) {
   try {
     const browser = await chromium.launch({
-      headless: false,
+      headless: true,
       slowMo: 50,
     });
 
